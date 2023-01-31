@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!-- 配置中央调度控制器 servlet -->
+    <!--    <servlet>-->
+    <!--        <servlet-name>springDispatcherServlet</servlet-name>-->
+    <!--        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+    <!--        <init-param>-->
+    <!--            <param-name>contextConfigLoction</param-name>-->
+    <!--            <param-value>classpath:</param-value>-->
+    <!--        </init-param>-->
+    <!--        &lt;!&ndash; load-on-startrup  表示tomcat启动时，会自动的加载这个servlet-->
+    <!--         数字表示 加载顺序 越小约先加载&ndash;&gt;-->
+    <!--        <load-on-startup>1</load-on-startup>-->
+    <!--    </servlet>-->
+    <!--    &lt;!&ndash; i<url-pattern>/</url-pattern>  这样配置支持restful  url 请求 &ndash;&gt;-->
+    <!--    <servlet-mapping>-->
+    <!--        <servlet-name>springDispatcherServlet</servlet-name>-->
+    <!--        <url-pattern>/</url-pattern>-->
+    <!--    </servlet-mapping>-->
+
+    <!--    <listener>-->
+    <!--        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>-->
+    <!--    </listener>-->
+
+    <!--    <context-param>-->
+    <!--        <param-name>contextConfigLocation</param-name>-->
+    <!--        <param-value>/WEB-INF/app-context.xml</param-value>-->
+    <!--    </context-param>-->
+
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <filter>
+        <filter-name>MyccharacterFilter</filter-name>
+        <filter-class>com.compy.springmvc.mycharacterFIlter.MycharactFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>MyccharacterFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>hiddenHttpMethodFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <filter>
+        <filter-name>myFilter</filter-name>
+        <filter-class>com.compy.springmvc.utils.MyHttpMethodFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>myFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+
+
+    <servlet>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--        <init-param>-->
+        <!--            <param-name>contextConfigLocation</param-name>-->
+        <!--            <param-value>classpath:applicationContext.xml</param-value>-->
+        <!--        </init-param>-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>springDispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>

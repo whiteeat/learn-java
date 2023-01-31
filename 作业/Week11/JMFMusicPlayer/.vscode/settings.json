@@ -1,0 +1,9 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "d:\\Program Files (x86)\\JMF2.1.1e\\lib\\jmf.jar"
+    ],
+    "java.project.sourcePaths": [
+        "."
+    ]
+}

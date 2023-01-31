@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+							http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+							http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+							http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+        <!-- 开启扫描-->
+    <context:component-scan base-package="com.compy.springmvc.*" use-default-filters="false">
+         <context:include-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+
+         <mvc:interceptors>
+
+              <mvc:interceptor>
+                  <mvc:mapping path="/testMyInter"/>
+                  <ref bean="myInterceptor"></ref>
+              </mvc:interceptor>
+             <bean  class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"></bean>
+        <!--配置自定义  直接引用拦截就行  -->
+<!--                 <ref bean="myInterceptor"></ref>-->
+<!--                 <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>-->
+         </mvc:interceptors>
+
+
+        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+            <property name="prefix" value="/WEB-INF/pages/"></property>
+            <property name="suffix"  value=".jsp"/>
+        </bean>
+
+
+        <!-- 配置可以解析自定义的视图解析器
+             1 。 BeanNameViewResolver   这个是可以解析自定义视图解析器
+             2 。 name="order": 表示给这个解析器设置优先即， 默认很低 值Integer.Max_value
+             3 。 一般来说明， 我们自己的视图解析优先级很高。 oreder值越小 优先级越好评-->
+       <bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+               <property name="order" value="99"></property>
+       </bean>
+<!--        &lt;!&ndash; 加入两个常规配置 才会加载js css 文件&ndash;&gt;-->
+<!--        <mvc:annotation-driven/>-->
+<!--        <mvc:default-servlet-handler/>-->
+            <mvc:annotation-driven/>
+            <mvc:default-servlet-handler/>
+
+        <bean id="messageSource"  class="org.springframework.context.support.ResourceBundleMessageSource">
+             <!--  配置国际化的文件名字
+                如果这样配置中的话，表示messageSourece回到 src/i18n.prop[erties 去读取错误信息-->
+            <property name="basename"   value="i18n"> </property>
+        </bean>
+
+
+     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+            <property name="exceptionMappings">
+                  <props>
+                        <prop key="java.lang.ArrayIndexOutOfBoundsException">arrEX</prop>
+                  </props>
+            </property>
+     </bean>
+    
+
+</beans>

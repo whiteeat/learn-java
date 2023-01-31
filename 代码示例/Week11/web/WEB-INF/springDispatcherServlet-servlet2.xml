@@ -1,0 +1,15 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<bean> -->
+<!--    -->
+
+<!--    &lt;!&ndash; 开启扫描&ndash;&gt;-->
+<!--    <context:component-scan base-package="com.compy.springmvc.*"/>-->
+
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="prefix" value="/WEB-INF/pages/"></property>-->
+<!--        <property name="suffix"  value=".jsp"/>-->
+<!--    </bean>-->
+<!--    &lt;!&ndash; 加入两个常规配置 才会加载js css 文件&ndash;&gt;-->
+<!--    <mvc:annotation-driven></mvc:annotation-driven>-->
+<!--    <mvc:default-servlet-handler></mvc:default-servlet-handler>-->
+<!--</beann>-->

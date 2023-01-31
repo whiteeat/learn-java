@@ -1,0 +1,36 @@
+class Week2 {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        int left = 0;
+        for (int i = 3; i<=5; ++i)
+        {
+            left += i*i*i;
+        }
+        int right = 6*6*6;
+        if (left == right)
+        {
+            System.out.println("Left equals to right!");
+        }
+        else
+        {
+            System.out.println("Left doesn't equal to right!");
+        }
+        assert left == right;
+
+        left = 0;
+        for (int i = 6; i<=69; ++i)
+        {
+            left += i*i*i;
+        }
+        right = 180*180*180;
+        if (left == right)
+        {
+            System.out.println("Left equals to right!");
+        }
+        else
+        {
+            System.out.println("Left doesn't equal to right!");
+        }
+        assert left == right;
+    }
+}
